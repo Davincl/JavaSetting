@@ -16,7 +16,44 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
     
-    <mvc:default-servlet-handler />
+    <mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<!-- for @AuthenticationPrincipal in security 3 -->
+			<!-- <bean class="org.springframework.security.web.bind.support.AuthenticationPrincipalArgumentResolver" /> -->
+			<!-- for @AuthenticationPrincipal in security 4 -->
+			<bean class="org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver" />
+			<!-- for org.springframework.mobile.device.Device -->
+			<bean class="org.springframework.mobile.device.DeviceWebArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+	
+	<security:global-method-security
+		pre-post-annotations="enabled" />
+	
+	<mvc:default-servlet-handler />
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/js/**"/>
+			<mvc:exclude-mapping path="/locale/**"/>
+			<mvc:exclude-mapping path="/css/**"/>
+			<mvc:exclude-mapping path="/fonts/**"/>
+			<mvc:exclude-mapping path="/images/**"/>
+			<mvc:exclude-mapping path="/template/**"/>
+			<mvc:exclude-mapping path="/**/*.properties"/>
+			<mvc:exclude-mapping path="/public/**" />
+			<mvc:exclude-mapping path="/common/css/**"/>
+			<mvc:exclude-mapping path="/common/js/**"/>
+			<mvc:exclude-mapping path="/common/lib/**"/>
+			<mvc:exclude-mapping path="/rest/**"/>
+			<mvc:exclude-mapping path="/inc/**"/>
+			<ref bean="menuResolver" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<bean id="menuResolver" class="sample.interceptor.MenuResolver" />
+	
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="webBindingInitializer">
@@ -51,7 +88,7 @@
 
     <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
 	    p:viewClass="org.springframework.web.servlet.view.JstlView"
-	    p:prefix="/WEB-INF/jsp/egovframework/example/" p:suffix=".jsp"/>
+	    p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
 
     <!-- For Pagination Tag -->
     <bean id="imageRenderer" class="sample.common.EgovImgPaginationRenderer"/>

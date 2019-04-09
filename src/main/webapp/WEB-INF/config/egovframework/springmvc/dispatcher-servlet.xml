@@ -48,11 +48,11 @@
 			<mvc:exclude-mapping path="/common/lib/**"/>
 			<mvc:exclude-mapping path="/rest/**"/>
 			<mvc:exclude-mapping path="/inc/**"/>
-			<ref bean="menuResolver" />
+			<ref bean="commonInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
-	<bean id="menuResolver" class="sample.interceptor.MenuResolver" />
+	<bean id="commonInterceptor" class="sample.interceptor.CommonInterceptor" />
 	
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">

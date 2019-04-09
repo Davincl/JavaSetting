@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class MenuResolver extends HandlerInterceptorAdapter{
-	private static final Logger LOGGER = LoggerFactory.getLogger(MenuResolver.class);
+public class CommonInterceptor extends HandlerInterceptorAdapter{
+	private static final Logger LOGGER = LoggerFactory.getLogger(CommonInterceptor.class);
 	
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 		try {
@@ -20,6 +20,10 @@ public class MenuResolver extends HandlerInterceptorAdapter{
 //				HttpSession session = request.getSession();
 				
 				// Session 메뉴 담기.
+				
+				// 접근 권한 체크 
+				
+				// 모바일 체크
 			}
 		} catch(Exception e){
 			LOGGER.error(e.getMessage() + " : " + e.toString());

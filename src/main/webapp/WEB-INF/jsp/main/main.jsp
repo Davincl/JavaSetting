@@ -2,5 +2,11 @@
 <%@ include file="/WEB-INF/jsp/inc/taglib.jsp"%>
 
 메인 화면.
+로그인
 
-<img src="/images/egovframework/cmmn/btn_page_next1.gif" />
+Layout
+1. 메인
+2. 서브
+3. Empty Basic
+
+<img src="/images/testImage.jpg" style="width:100px;"/>
